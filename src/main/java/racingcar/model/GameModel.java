@@ -9,7 +9,10 @@ public class GameModel {
     private final List<String> winner;
 
     public GameModel(String carName) {
+        isDelimiter(carName);
         String[] cars = carName.split(",");
+        isRightCarName(cars);
+
         this.cars = cars;
         this.resultOfMovement = getResultOfMovement(cars);
         this.winner = new ArrayList<>();
@@ -63,4 +66,22 @@ public class GameModel {
             }
         }
     }
+
+    public void isRightCarName(String[] cars) {
+        for (String car : cars) {
+            if (car.length() > 5) {
+                throw new IllegalArgumentException("자동차 이름은 5자 이하만 가능합니다.");
+            }
+            if (car.isEmpty()) {
+                throw new IllegalArgumentException("올바른 자동차 이름을 입력하세요.");
+            }
+        }
+    }
+
+    public void isDelimiter(String carName) {
+        if (!carName.contains(",")) {
+            throw new IllegalArgumentException("올바른 구분자를 입력하세요.");
+        }
+    }
+
 }

@@ -4,15 +4,15 @@ import racingcar.model.GameModel;
 import racingcar.view.GameView;
 
 public class GameController {
-    private final GameModel model;
+    private GameModel model;
     private final GameView view;
 
-    public GameController(GameModel model, GameView view) {
-        this.model = model;
+    public GameController(GameView view) {
         this.view = view;
     }
 
     public void playGame() {
+        initModel();
         int count = view.getCount();
         System.out.println("\n실행 결과");
         for (int i = 0; i < count; i++) {
@@ -21,5 +21,10 @@ public class GameController {
         }
         model.findWinner(model.getMax());
         view.printWinner(model.getWinner());
+    }
+
+    private void initModel() {
+        String carName = view.getCarName();
+        this.model = new GameModel(carName);
     }
 }
