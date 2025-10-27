@@ -7,9 +7,18 @@ import java.util.*;
 public class Application {
     public static void main(String[] args) {
 
+        final String delimiter = ",";
         System.out.println("경주할 자동차 이름을 입력하세요.(이름은 쉼표(,) 기준으로 구분)");
         String carName = Console.readLine();
-        String[] cars = carName.split(",");
+        if (!carName.contains(delimiter)) {
+            throw new IllegalArgumentException("올바른 구분자를 입력하세요.");
+        }
+        String[] cars = carName.split(delimiter);
+        for (String car : cars) {
+            if (car.length() > 5) {
+                throw new IllegalArgumentException("자동차 이름은 5자 이하만 가능합니다.");
+            }
+        }
         List<List<Character>> resultOfMovement = new ArrayList<>();
         for (int i = 0; i < cars.length; i++) {
             List<Character> list = new ArrayList<>();
