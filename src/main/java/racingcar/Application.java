@@ -11,7 +11,7 @@ public class Application {
         isDelimiter(carName);
 
         String[] cars = carName.split(",");
-        isLessThan5Letters(cars);
+        isRightCarName(cars);
 
         List<List<Character>> resultOfMovement = getResultOfMovement(cars);
         int count = getCount();
@@ -33,10 +33,13 @@ public class Application {
         }
     }
 
-    private static void isLessThan5Letters(String[] cars) {
+    private static void isRightCarName(String[] cars) {
         for (String car : cars) {
             if (car.length() > 5) {
                 throw new IllegalArgumentException("자동차 이름은 5자 이하만 가능합니다.");
+            }
+            if (car.isEmpty()) {
+                throw new IllegalArgumentException("올바른 자동차 이름을 입력하세요.");
             }
         }
     }
